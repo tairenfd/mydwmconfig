@@ -31,8 +31,7 @@ static const Rule rules[] = {
 	 */
 	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
 	{ "Gimp",       NULL,     NULL,           0,         1,          0,           0,        -1 },
-	{ "Firefox",    NULL,     NULL,           1 << 8,    0,          0,          -1,        -1 },
-	{ "Alacritty",  NULL,     NULL,           0,         0,          1,           0,        -1 },
+	{ "kitty",  		NULL,     NULL,           0,         0,          1,           0,        -1 },
 	{ NULL,         NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
  };
 /* layout(s) */
@@ -57,27 +56,28 @@ static const Layout layouts[] = {
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define SHCMD(cmd) { .v = (const char*[]){ "/usr/bin/alacritty", "-c", cmd, NULL } }
+#define SHCMD(cmd) { .v = (const char*[]){ "/usr/bin/kitty", "-e", cmd, NULL } }
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run_i", "-g", "5", "-l", "8", "-m", dmenumon, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
-static const char *newscmd[]  = { "alacritty", "-e", "newsboat",NULL };
-static const char *ytcmd[]  = { "alacritty", "-e", "youtube-run",NULL };
-static const char *musiccmd[]  = { "alacritty", "-e", "youtube-playlist",NULL };
-static const char *mccmd[]  = { "alacritty", "-e", "mc", NULL};
-static const char *qutecmd[]  = { "qutebrowser", NULL };
+static const char *termcmd[]  = { "kitty", NULL };
+static const char *webcmd[]  = { "qutebrowser", NULL };
+static const char *scriptcmd[]  = { "kitty", "--hold", "dmenu_scripts", NULL };
+// static const char *fmcmd[]  = { "", "", "", NULL };
+static const char *dmenucmd[]  = { "dmenu_run_i", "-g", "5", "-l", "10", "-m", dmenumon, NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_w,      spawn,          {.v = qutecmd } },
-	{ MODKEY,                       XK_f,      spawn,          {.v = mccmd } },
+	{ MODKEY,                       XK_w,      spawn,          {.v = webcmd } },
+	{ MODKEY|ShiftMask,             XK_w,      spawn,          SHCMD("dmenu_bookmarks") },
+	{ MODKEY,                       XK_s,      spawn,          {.v = scriptcmd } },
+	// { MODKEY,                       XK_f,      spawn,          {.v = fmcmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_n,      spawn,          {.v = newscmd } },
-	{ MODKEY,                       XK_y,      spawn,          {.v = ytcmd } },
-	{ MODKEY,                       XK_m,      spawn,          {.v = musiccmd } },
+	{ MODKEY,                       XK_n,      spawn,          SHCMD("newsboat") },
+	{ MODKEY|ShiftMask,             XK_y,      spawn,          SHCMD("yt_runV2") },
+	{ MODKEY,                       XK_y,      spawn,          SHCMD("yt_dmenu_run") },
+	{ MODKEY,                       XK_m,      spawn,          SHCMD("yt_plist_run") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -88,9 +88,9 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
-	{ MODKEY,                       XK_T,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_F,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_M,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY|ShiftMask,             XK_t,      setlayout,      {.v = &layouts[0]} },
+	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY|ShiftMask,             XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },

@@ -63,7 +63,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *webcmd[]  = { "qutebrowser", NULL };
 static const char *scriptcmd[]  = { "kitty", "--hold", "dmenu_scripts", NULL };
-// static const char *fmcmd[]  = { "", "", "", NULL };
+static const char *mailcmd[]  = { "qutebrowser", "mailbox.org", NULL };
 static const char *dmenucmd[]  = { "dmenu_run_i", "-g", "5", "-l", "10", "-m", dmenumon, NULL };
 
 static Key keys[] = {
@@ -72,12 +72,11 @@ static Key keys[] = {
 	{ MODKEY,                       XK_w,      spawn,          {.v = webcmd } },
 	{ MODKEY|ShiftMask,             XK_w,      spawn,          SHCMD("dmenu_bookmarks") },
 	{ MODKEY,                       XK_s,      spawn,          {.v = scriptcmd } },
-	// { MODKEY,                       XK_f,      spawn,          {.v = fmcmd } },
+	{ MODKEY,                       XK_f,      spawn,          SHCMD("lf") },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_n,      spawn,          SHCMD("newsboat") },
-	{ MODKEY|ShiftMask,             XK_y,      spawn,          SHCMD("yt_runV2") },
-	{ MODKEY,                       XK_y,      spawn,          SHCMD("yt_dmenu_run") },
-	{ MODKEY,                       XK_m,      spawn,          SHCMD("yt_plist_run") },
+	{ MODKEY,                       XK_y,      spawn,          SHCMD("yt2rss") },
+	{ MODKEY,                       XK_m,      spawn,          {.v = mailcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },

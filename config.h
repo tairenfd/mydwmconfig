@@ -56,11 +56,11 @@ static const Layout layouts[] = {
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define SHCMD(cmd) { .v = (const char*[]){ "/usr/bin/zsh", "-e", cmd, NULL } }
+#define SHCMD(cmd) { .v = (const char*[]){ "kitty", cmd, NULL } }
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "kitty", NULL };
 static const char *webcmd[]  = { "qutebrowser", NULL };
 static const char *scriptcmd[]  = { "kitty", "--hold", "dmenu_scripts", NULL };
 static const char *mailcmd[]  = { "qutebrowser", "mailbox.org", NULL };

@@ -64,7 +64,7 @@ static const char *termcmd[]  = { "kitty", NULL };
 static const char *webcmd[]  = { "qutebrowser", NULL };
 static const char *scriptcmd[]  = { "kitty", "--hold", "dmenu_scripts", NULL };
 static const char *mailcmd[]  = { "qutebrowser", "mailbox.org", NULL };
-static const char *dmenucmd[]  = { "dmenu_run_i", "-g", "5", "-l", "10", "-m", dmenumon, NULL };
+static const char *dmenucmd[]  = { "dmenu_run_i", "-l", "10", "-m", dmenumon, NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */

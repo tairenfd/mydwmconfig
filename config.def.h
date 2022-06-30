@@ -62,7 +62,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *webcmd[]  = { "qutebrowser", NULL };
-static const char *scriptcmd[]  = { "dmenu_scripts", NULL };
+static const char *scriptcmd[]  = { "kitty", "--hold", "dmenu_scripts", NULL };
 static const char *mailcmd[]  = { "qutebrowser", "mailbox.org", NULL };
 static const char *dmenucmd[]  = { "dmenu_run_i", "-l", "10", "-m", dmenumon, NULL };
 
